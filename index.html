@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Diagnosis</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <script>
+        async function askQuestions() {
+            const responses = {};
+
+            // Question 1
+            const {
+                value: headache
+            } = await Swal.fire({
+                title: 'Do you ever have a headache?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.headache = headache;
+
+            // Question 2
+            const {
+                value: stomach
+            } = await Swal.fire({
+                title: 'Do you have stomach running?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.stomach = stomach;
+
+            // Question 3
+            const {
+                value: coughing
+            } = await Swal.fire({
+                title: 'Do you have coughing?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.coughing = coughing;
+
+            // Question 4
+            const {
+                value: sleepiness
+            } = await Swal.fire({
+                title: 'Do you have sleepless nights?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.sleepiness = sleepiness;
+
+            // Determine result
+            let resultMessage = 'Great!!! Have a nice day rest';
+
+            if (responses.headache === 'yes' && responses.sleepiness === 'yes') {
+                resultMessage = 'You need a rest';
+            } else if (responses.stomach === 'yes' && responses.coughing === 'yes') {
+                resultMessage = 'You have Malaria';
+            } else if (responses.headache === 'yes' && responses.coughing === 'yes') {
+                resultMessage = 'You have Typhoid';
+            } else if (responses.headache === 'yes' && responses.stomach === 'yes') {
+                resultMessage = 'You have a fever';
+            }
+
+            // Show result
+            Swal.fire({
+                title: 'Diagnosis Result',
+                text: resultMessage,
+                icon: 'info'
+            });
+        }
+
+        // Start the questions when the page loads
+        window.onload = askQuestions;
+    </script>
+</body>
+
+</html>
