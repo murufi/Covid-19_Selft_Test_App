@@ -13,11 +13,20 @@
         async function askQuestions() {
             const responses = {};
 
+            const {
+
+            } = await Swal.fire({
+                title: 'Welocome to Covid-19 Self-Test Application By Ahmad, ',
+                text: "There are 12 questions to answer in the Application, \n \n Click Ok To Continue"
+
+
+            });
+
             // Question 1
             const {
                 value: headache
             } = await Swal.fire({
-                title: 'Do you ever have a headache?',
+                title: '1. Do you ever have a headache?',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -33,9 +42,9 @@
 
             // Question 2
             const {
-                value: stomach
+                value: cold
             } = await Swal.fire({
-                title: 'Do you have stomach running?',
+                title: '2. Do you have cold?',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -47,13 +56,13 @@
                     }
                 }
             });
-            responses.stomach = stomach;
+            responses.cold = cold;
 
             // Question 3
             const {
                 value: coughing
             } = await Swal.fire({
-                title: 'Do you have coughing?',
+                title: '3. Do you have coughing?',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -69,9 +78,9 @@
 
             // Question 4
             const {
-                value: sleepiness
+                value: bodyaches
             } = await Swal.fire({
-                title: 'Do you have sleepless nights?',
+                title: '4. DO you have body aches?',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -83,13 +92,162 @@
                     }
                 }
             });
-            responses.sleepiness = sleepiness;
+            responses.bodyaches = bodyaches;
+
+            // Question 5
+            const {
+                value: darrihea
+            } = await Swal.fire({
+                title: '5. DO you have Darrihea?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.darrihea = darrihea;
+
+            // Question 6
+            const {
+                value: throat
+            } = await Swal.fire({
+                title: '6. DO you have Sore Throat ?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.throat = throat;
+
+            // Question 7
+            const {
+                value: fever
+            } = await Swal.fire({
+                title: '7. DO you have a Fever (37.8C and above)? ',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.fever = fever;
+
+            // Question 8
+            const {
+                value: breathing
+            } = await Swal.fire({
+                title: '8. DO you have difficulty Breathing ?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.breathing = breathing;
+
+            // Question 9
+            const {
+                value: fatigue
+            } = await Swal.fire({
+                title: '9. Are You experience Fatigue ?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.fatigue = fatigue;
+
+            // Question 10
+            const {
+                value: month
+            } = await Swal.fire({
+                title: '10. Have you travel in the past 1 month ? ',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.month = month;
+
+            // Question 11
+            const {
+                value: area
+            } = await Swal.fire({
+                title: '11. The you have a travel history to a Covid-19 Area?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.area = area;
+
+            // Question 12
+            const {
+                value: patient
+            } = await Swal.fire({
+                title: '12. Have you have direct contact with or taking care of a positive Covid-19 patient? ',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.patient = patient;
 
             // Determine result
             let resultMessage = 'Great!!! Have a nice day rest';
 
             if (responses.headache === 'yes' && responses.sleepiness === 'yes') {
                 resultMessage = 'You need a rest';
+            } else if (responses.stomach === 'yes' && responses.coughing === 'yes') {
+                resultMessage = 'You have Malaria';
+            } else if (responses.headache === 'yes' && responses.coughing === 'yes' && responses.darrihea === 'yes') {
+                resultMessage = '🔴 Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information \n' + 'Mst. Rufai\n' + '08167468712, 07062076239  ';
+
             } else if (responses.stomach === 'yes' && responses.coughing === 'yes') {
                 resultMessage = 'You have Malaria';
             } else if (responses.headache === 'yes' && responses.coughing === 'yes') {
