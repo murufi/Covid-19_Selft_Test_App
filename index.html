@@ -16,7 +16,7 @@
             const {
 
             } = await Swal.fire({
-                title: 'Welocome to Covid-19 Self-Test Application Design By Ahmad, ',
+                title: 'Hey, Welocome to Covid-19 Self-Test Application Design By Ahmad, ',
                 text: "There are 12 questions to answer in the Application, \n \n Click Ok To Continue"
 
 
@@ -62,7 +62,7 @@
             const {
                 value: coughing
             } = await Swal.fire({
-                title: '3. Do you have coughing?',
+                title: '3. Do you have dry cough?',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -98,7 +98,7 @@
             const {
                 value: darrihea
             } = await Swal.fire({
-                title: '5. DO you have Darrihea?',
+                title: '5. DO you have Diarrhoea?',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -134,7 +134,7 @@
             const {
                 value: fever
             } = await Swal.fire({
-                title: '7. DO you have a Fever (37.8C and above)? ',
+                title: '7. DO you have a Fever (38.8C and above)? ',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -222,9 +222,45 @@
 
             // Question 12
             const {
+                value: loss
+            } = await Swal.fire({
+                title: '11. The you experience loss of taste ?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.loss = loss;
+
+            // Question 13
+            const {
+                value: chest
+            } = await Swal.fire({
+                title: '11. The you have persistent chest pain or pressure?',
+                input: 'radio',
+                inputOptions: {
+                    yes: 'Yes',
+                    no: 'No'
+                },
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose an answer!';
+                    }
+                }
+            });
+            responses.chest = chest;
+
+            // Question 14
+            const {
                 value: patient
             } = await Swal.fire({
-                title: '12. Have you have direct contact with or taking care of a positive Covid-19 patient? ',
+                title: '12. Do you have direct contact with or taking care of a positive Covid-19 patient? ',
                 input: 'radio',
                 inputOptions: {
                     yes: 'Yes',
@@ -240,28 +276,30 @@
 
             // Determine result
             let resultMessage = 'Great!!! You have no symptoms, take rest, have a maxium 8hrs sleep,\n' +
-                ' drink a lot of water, always sanitize your hand and stake hygiene';
+                ' drink a lot of water, always sanitize your hands and stay hygiene';
 
             if (responses.patient === 'yes') {
-                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information \n' + 'Mr. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\ n ' + ' 08167468712, 07062076239 ';
             } else if (responses.area === 'yes') {
-                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information \n' + 'Mr. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\ n ' + '08167468712, 07062076239 ';
             } else if (responses.coughing === 'yes' && responses.throat === 'yes' && responses.darrihea === 'yes' && responses.breathing === 'yes') {
-                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information \n' + 'Mr. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\ n ' + '08167468712, 07062076239 ';
             } else if (responses.darrihea === 'yes' && responses.throat === 'yes' && responses.fever === 'yes' && responses.fatigue === 'yes') {
-                resultMessage = '🔴Your Test is negative Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information \n' + 'Mst. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = '🔴Your Test is negative Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\n' + '08167468712, 07062076239  ';
 
             } else if (responses.throat === 'yes' && responses.fever === 'yes' && responses.breathing === 'yes' && responses.fatigue === 'yes') {
-                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information \n' + 'Mr. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\ n ' + '08167468712, 07062076239 ';
             } else if (responses.headache === 'yes' && responses.coughing === 'yes' && responses.cold === 'yes' && responses.fever === 'yes') {
-                resultMessage = 'You have no symptoms, Stay save and check `https://www.ncdc.gove.ng` for regular update \n' + 'OR\n' + 'Call the owner of this app for more information \n' + 'Mst. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = 'You have no symptoms, Stay save and check `https://www.ncdc.gove.ng` for regular update \n' + 'OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\n' + '08167468712, 07062076239  ';
             } else if (responses.headache === 'yes' && responses.coughing === 'yes' && responses.throat === 'yes' && responses.breathing) {
-                resultMessage = 'Seek a consultant with a Doctor \n ' + ' OR\n' + 'Call the owner of this app for more information \n' + 'Mst. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = 'Seek a consultant with a Doctor \n ' + ' OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\n' + '08167468712, 07062076239  ';
 
             } else if (responses.headache === 'yes' && responses.fever === 'yes' && responses.bodyaches === 'yes') {
-                resultMessage = 'You have no symptoms, always sanitize your hands, Stay save and check `https://www.ncdc.gove.ng` for regular update \n' + 'OR\n' + 'Call the owner of this app for more information \n' + 'Mst. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = 'You have no symptoms, always sanitize your hands, Stay save and check `https://www.ncdc.gove.ng` for regular update \n' + 'OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\n' + '08167468712, 07062076239  ';
             } else if (responses.cold === 'yes' && responses.fever === 'yes' && responses.bodyaches === 'yes' && responses.coughing) {
-                resultMessage = 'You have no symptoms, always sanitize your hands, Stay save and check `https://www.ncdc.gove.ng` for regular update \n' + 'OR\n' + 'Call the owner of this app for more information \n' + 'Mst. AhmadRufai\n' + '08167468712, 07062076239  ';
+                resultMessage = 'You have no symptoms, always sanitize your hands, Stay save and check `https://www.ncdc.gove.ng` for regular update \n' + 'OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\n' + '08167468712, 07062076239  ';
+            } else if (responses.loss === 'yes' && responses.chest === 'yes' && responses.throat === 'yes' && responses.breathing) {
+                resultMessage = '🔴Your have test negative, Call the Covid-19 Hotline \n' + '08000CORONA or \n' + '080097000010\n' + 'For any nearest isolation center \n' + ' OR\n' + 'Call the owner of this app for more information. \n' + 'SWE. AhmadRufai\ n ' + '08167468712, 07062076239 ';
             }
 
             // Show result
